@@ -1,85 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <base target="_top">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Gelibpro</title>
+
     <style>
-        /* ... (votre CSS reste exactement le même) ... */
+        /* Toutes les règles de style sont maintenant correctement placées dans la balise <style> */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            width: 90%;
+            height: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un meilleur effet visuel */
+            border-radius: 8px;
+            overflow: hidden; /* Assure que le contenu de l'iframe ne déborde pas */
+            border: 1px solid #ccc; /* Ajout d'une bordure subtile */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none; /* Cela supprime la bordure par défaut de l'iframe */
+        }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>Connexion</h1>
-        <form id="login-form">
-            <div class="form-group">
-                <label for="username">Utilisateur</label>
-                <input type="text" id="username" required autocomplete="username">
-            </div>
-            <div class="form-group">
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" required autocomplete="current-password">
-            </div>
-            <button type="submit" id="login-btn" class="btn">Se connecter</button>
-            <p id="error-message"></p>
-        </form>
 
-        <!-- Ce lien doit pointer vers votre page client sur GitHub -->
-        <a href="https://gelibpro.github.io/pos/" class="client-pos-link">
-             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="currentColor"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M15.55 13c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45zM6.16 6h12.15l-2.76 5H8.53L6.16 6zM7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
-            <span>Accéder au catalogue client</span>
-        </a>
+    <!-- Le contenu visible de la page est maintenant correctement dans la balise <body> -->
+    <div class="container">
+        <iframe src="https://script.google.com/macros/s/AKfycbzFrKJE_SVDlU-EXhbLrHV_wVgIqzTODWl-3jYJTCT7a5q1McglbZoBku_KnMk0fVzCBA/exec"></iframe>
     </div>
 
-    <script>
-        document.getElementById('login-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const btn = document.getElementById('login-btn');
-            const errorMsg = document.getElementById('error-message');
-
-            // IMPORTANT : Remplacez cette URL par l'URL de votre application web que vous avez copiée à l'étape 2
-            const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzFrKJE_SVDlU-EXhbLrHV_wVgIqzTODWl-3jYJTCT7a5q1McglbZoBku_KnMk0fVzCBA/exec";
-
-            btn.disabled = true;
-            btn.textContent = 'Connexion...';
-            errorMsg.textContent = '';
-
-            // MODIFICATION : On utilise fetch au lieu de google.script.run
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                body: JSON.stringify({
-                    action: 'authenticateUser', // On dit au routeur doPost quelle fonction appeler
-                    username: username,
-                    password: password
-                })
-            })
-            .then(response => response.json())
-            .then(response => {
-                // Si l'authentification réussit
-                if (response.success) {
-                    // Stocke les informations de l'utilisateur dans le stockage local du navigateur
-                    localStorage.setItem('gelibproUser', JSON.stringify(response.user));
-                    
-                    // MODIFICATION : Redirige vers VOTRE page d'application sur GitHub
-                    window.location.href = "https://gelibpro.github.io/app/"; // ou le chemin relatif vers votre page principale
-                } else {
-                    // Si l'authentification échoue, affiche le message d'erreur
-                    errorMsg.textContent = response.message;
-                    btn.disabled = false;
-                    btn.textContent = 'Se connecter';
-                }
-            })
-            .catch(error => {
-                // En cas d'erreur de communication avec le serveur
-                console.error('Login Failure:', error);
-                errorMsg.textContent = "Erreur de communication avec le serveur.";
-                btn.disabled = false;
-                btn.textContent = 'Se connecter';
-            });
-        });
-    </script>
 </body>
 </html>
