@@ -1,29 +1,82 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gelibpro</title>
+    <title>Gelibpro - Navigation</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; background-color: #f0f0f0; }
-        .container { width: 90%; height: 90%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden; border: 1px solid #ccc; }
-        iframe { width: 100%; height: 100%; border: none; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        .header-buttons {
+            padding: 15px;
+            text-align: center;
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ccc;
+        }
+        .header-buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+        .header-buttons button.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        iframe {
+            border: none;
+            width: 100%;
+            height: 100%;
+            flex-grow: 1; /* Permet à l'iframe de remplir l'espace restant */
+        }
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <iframe id="appIframe" src="https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec"></iframe>
+    <div class="header-buttons">
+        <button id="employeeBtn" class="active">Espace Employé</button>
+        <button id="clientBtn">Catalogue Client</button>
     </div>
+
+    <iframe id="employeeFrame" src="https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec"></iframe>
+    <iframe id="clientFrame" class="hidden" src="https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec?page=pos"></iframe>
+
     <script>
-        window.addEventListener('message', function(event) {
-            // Assurez-vous que le message provient de votre domaine Apps Script
-            if (event.origin === "https://script.google.com") {
-                if (event.data === 'logout') {
-                    // Rechargez l'iframe en changeant son URL
-                    document.getElementById('appIframe').src = document.getElementById('appIframe').src + '?logout=true';
-                }
-            }
-        });
+        // Récupération des éléments
+        const employeeBtn = document.getElementById('employeeBtn');
+        const clientBtn = document.getElementById('clientBtn');
+        const employeeFrame = document.getElementById('employeeFrame');
+        const clientFrame = document.getElementById('clientFrame');
+
+        // Fonction pour afficher l'iframe de l'espace employé
+        function showEmployeeFrame() {
+            employeeFrame.classList.remove('hidden');
+            clientFrame.classList.add('hidden');
+            employeeBtn.classList.add('active');
+            clientBtn.classList.remove('active');
+        }
+
+        // Fonction pour afficher l'iframe du catalogue client
+        function showClientFrame() {
+            clientFrame.classList.remove('hidden');
+            employeeFrame.classList.add('hidden');
+            clientBtn.classList.add('active');
+            employeeBtn.classList.remove('active');
+        }
+
+        // Ajout des écouteurs d'événements sur les boutons
+        employeeBtn.addEventListener('click', showEmployeeFrame);
+        clientBtn.addEventListener('click', showClientFrame);
     </script>
 </body>
 </html>
