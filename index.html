@@ -4,43 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gelibpro</title>
-
     <style>
-        /* Toutes les règles de style sont maintenant correctement placées dans la balise <style> */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: #f0f0f0;
-        }
-
-        .container {
-            width: 90%;
-            height: 90%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ajoute une ombre pour un meilleur effet visuel */
-            border-radius: 8px;
-            overflow: hidden; /* Assure que le contenu de l'iframe ne déborde pas */
-            border: 1px solid #ccc; /* Ajout d'une bordure subtile */
-        }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none; /* Cela supprime la bordure par défaut de l'iframe */
-        }
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; background-color: #f0f0f0; }
+        .container { width: 90%; height: 90%; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; overflow: hidden; border: 1px solid #ccc; }
+        iframe { width: 100%; height: 100%; border: none; }
     </style>
 </head>
 <body>
-
-    <!-- Le contenu visible de la page est maintenant correctement dans la balise <body> -->
     <div class="container">
-        <iframe src="https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec"></iframe>
+        <iframe id="appIframe" src="https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec"></iframe>
     </div>
-
+    <script>
+        window.addEventListener('message', function(event) {
+            // Assurez-vous que le message provient de votre domaine Apps Script
+            if (event.origin === "https://script.google.com") {
+                if (event.data === 'logout') {
+                    // Rechargez l'iframe en changeant son URL
+                    document.getElementById('appIframe').src = document.getElementById('appIframe').src + '?logout=true';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
