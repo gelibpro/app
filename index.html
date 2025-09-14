@@ -35,10 +35,7 @@
             border: none;
             width: 100%;
             height: 100%;
-            flex-grow: 1; /* Permet à l'iframe de remplir l'espace restant */
-        }
-        .hidden {
-            display: none;
+            flex-grow: 1;
         }
     </style>
 </head>
@@ -48,35 +45,34 @@
         <button id="clientBtn">Catalogue Client</button>
     </div>
 
-    <iframe id="employeeFrame" src="https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec"></iframe>
-    <iframe id="clientFrame" class="hidden" src="https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec?page=pos"></iframe>
+    <iframe id="mainIframe" src=""></iframe>
 
     <script>
-        // Récupération des éléments
         const employeeBtn = document.getElementById('employeeBtn');
         const clientBtn = document.getElementById('clientBtn');
-        const employeeFrame = document.getElementById('employeeFrame');
-        const clientFrame = document.getElementById('clientFrame');
+        const mainIframe = document.getElementById('mainIframe');
+        
+        const employeeUrl = "https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec";
+        const clientUrl = "https://script.google.com/macros/s/AKfycbz43dCF9x1ItNWWVgSZfsgi18vUeDVz5eP5jmumlDIBioZ9NAj3v6G8UFyfq1Ykz3aoQQ/exec?page=pos";
 
-        // Fonction pour afficher l'iframe de l'espace employé
-        function showEmployeeFrame() {
-            employeeFrame.classList.remove('hidden');
-            clientFrame.classList.add('hidden');
-            employeeBtn.classList.add('active');
-            clientBtn.classList.remove('active');
+        function showFrame(url, btn1, btn2) {
+            mainIframe.src = url;
+            btn1.classList.add('active');
+            btn2.classList.remove('active');
         }
 
-        // Fonction pour afficher l'iframe du catalogue client
-        function showClientFrame() {
-            clientFrame.classList.remove('hidden');
-            employeeFrame.classList.add('hidden');
-            clientBtn.classList.add('active');
-            employeeBtn.classList.remove('active');
-        }
+        employeeBtn.addEventListener('click', () => {
+            showFrame(employeeUrl, employeeBtn, clientBtn);
+        });
 
-        // Ajout des écouteurs d'événements sur les boutons
-        employeeBtn.addEventListener('click', showEmployeeFrame);
-        clientBtn.addEventListener('click', showClientFrame);
+        clientBtn.addEventListener('click', () => {
+            showFrame(clientUrl, clientBtn, employeeBtn);
+        });
+
+        // Charger l'iframe "Espace Employé" par défaut au chargement de la page
+        document.addEventListener('DOMContentLoaded', () => {
+            showFrame(employeeUrl, employeeBtn, clientBtn);
+        });
     </script>
 </body>
 </html>
