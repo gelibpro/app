@@ -1,81 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Gelibpro - Navigation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Site GitHub Pages</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+        body {
             font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
         }
-        .header-buttons {
-            padding: 15px;
-            text-align: center;
-            background-color: #f1f1f1;
-            border-bottom: 1px solid #ccc;
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .header-buttons button {
-            padding: 10px 20px;
-            margin: 0 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #fff;
-        }
-        .header-buttons button.active {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-        iframe {
-            border: none;
-            width: 100%;
-            height: 100%;
-            flex-grow: 1;
-        }
-        .hidden {
-            display: none;
+        h1 {
+            color: #0056b3;
         }
     </style>
 </head>
 <body>
-    <div class="header-buttons">
-        <button id="clientBtn" class="active">Catalogue Client</button>
-        <button id="employeeBtn">Espace Employé</button>
+
+    <div class="container">
+        <h1>Bienvenue sur mon site web !</h1>
+        <p>
+            Ceci est un exemple de page hébergée gratuitement avec **GitHub Pages**. 
+            Vous pouvez personnaliser ce fichier `index.html` avec votre propre contenu, 
+            comme des textes, des images, et des liens vers d'autres pages.
+        </p>
+        <p>
+            Explorez mes autres projets sur <a href="https://github.com/votre-nom-d-utilisateur" target="_blank">mon profil GitHub</a>.
+        </p>
     </div>
 
-    <!-- <iframe id="clientFrame" src="https://script.google.com/macros/s/AKfycby4GkTdOVBdWE8dmRimSOMqcPx0mK94z6o1lo0GVbY4V_RDGyTYQ_FCk7ixJcuGCjk5IQ/exec?page=pos"></iframe>
-    <iframe id="employeeFrame" class="hidden" src="https://script.google.com/macros/s/AKfycby4GkTdOVBdWE8dmRimSOMqcPx0mK94z6o1lo0GVbY4V_RDGyTYQ_FCk7ixJcuGCjk5IQ/exec"></iframe> -->
-
-    <script>
-        const employeeBtn = document.getElementById('employeeBtn');
-        const clientBtn = document.getElementById('clientBtn');
-        const employeeFrame = document.getElementById('employeeFrame');
-        const clientFrame = document.getElementById('clientFrame');
-
-        function showEmployeeFrame() {
-            employeeFrame.classList.remove('hidden');
-            clientFrame.classList.add('hidden');
-            employeeBtn.classList.add('active');
-            clientBtn.classList.remove('active');
-        }
-
-        function showClientFrame() {
-            clientFrame.classList.remove('hidden');
-            employeeFrame.classList.add('hidden');
-            clientBtn.classList.add('active');
-            employeeBtn.classList.remove('active');
-        }
-
-        employeeBtn.addEventListener('click', showEmployeeFrame);
-        clientBtn.addEventListener('click', showClientFrame);
-
-        // Appel initial pour s'assurer que le catalogue client est affiché au chargement
-        //document.addEventListener('DOMContentLoaded', showClientFrame);
-    </script>
 </body>
 </html>
