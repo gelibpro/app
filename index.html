@@ -48,8 +48,8 @@
         <button id="employeeBtn">Espace Employé</button>
     </div>
 
-    <iframe id="clientFrame" src="https://script.google.com/macros/s/AKfycby4GkTdOVBdWE8dmRimSOMqcPx0mK94z6o1lo0GVbY4V_RDGyTYQ_FCk7ixJcuGCjk5IQ/exec?page=pos"></iframe>
-    <iframe id="employeeFrame" class="hidden" src="https://script.google.com/macros/s/AKfycby4GkTdOVBdWE8dmRimSOMqcPx0mK94z6o1lo0GVbY4V_RDGyTYQ_FCk7ixJcuGCjk5IQ/exec"></iframe>
+    <!-- <iframe id="clientFrame" src="https://script.google.com/macros/s/AKfycby4GkTdOVBdWE8dmRimSOMqcPx0mK94z6o1lo0GVbY4V_RDGyTYQ_FCk7ixJcuGCjk5IQ/exec?page=pos"></iframe>
+    <iframe id="employeeFrame" class="hidden" src="https://script.google.com/macros/s/AKfycby4GkTdOVBdWE8dmRimSOMqcPx0mK94z6o1lo0GVbY4V_RDGyTYQ_FCk7ixJcuGCjk5IQ/exec"></iframe> -->
 
     <script>
         const employeeBtn = document.getElementById('employeeBtn');
@@ -75,7 +75,7 @@
         clientBtn.addEventListener('click', showClientFrame);
 
         // Appel initial pour s'assurer que le catalogue client est affiché au chargement
-        document.addEventListener('DOMContentLoaded', showClientFrame);
+        //document.addEventListener('DOMContentLoaded', showClientFrame);
     </script>
 </body>
 </html>
